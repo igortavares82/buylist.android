@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">BuyList</string>
+    <string name="title_section1">My lists</string>
+    <string name="title_section2">My items</string>
+    <string name="title_section3">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="domain">http://192.168.1.6:3000/</string>
+    <string name="error0">There is a connection error</string>
+    <string name="error400">Bad request</string>
+    <string name="error404">Route not find</string>
+    <string name="error500">Internal server error on http service</string>
+    <string name="connection_unavailable">Internet connection unavailable</string>
+    <string name="datetime_format">yyyy-MM-dd HH-mm:ss</string>
+    <string name="date_format">yyyy-MM-dd</string>
+    <string name="title_activity_home">Home</string>
+    <string name="openDrawer">Open drawer</string>
+    <string name="closeDrawer">Close drawer</string>
 </resources>
