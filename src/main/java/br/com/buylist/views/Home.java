@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import br.com.buylist.R;
 
@@ -38,7 +36,9 @@ public class Home extends ActionBarActivity {
 
         recycleView = (RecyclerView) findViewById(R.id.RecyclerView);
         recycleView.setHasFixedSize(true);
-        adapter = new HeaderAdapter(TITLES,ICONS, this.toolbar.getContext());
+
+        // Instancia o navigation drawer
+        adapter = new NvDrawerHeader(TITLES,ICONS, this.toolbar.getContext());
 
         recycleView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
