@@ -26,11 +26,8 @@ public class HeaderAdapter extends RecyclerView.Adapter {
     private String navTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
 
-    private String name;        //String Resource for header View Name
     private int profile;        //int Resource for header view profile picture
-    private String email;
     private Context context;
-
 
     HeaderAdapter(String Titles[],int Icons[], Context context) {
 
@@ -70,7 +67,8 @@ public class HeaderAdapter extends RecyclerView.Adapter {
 
             // position by 1 and pass it to the holder while setting the text and image
             pHolder.textView.setText(navTitles[position - 1]); // Setting the Text with the array of our Titles
-            pHolder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
+            pHolder.imageView.setImageResource(mIcons[position - 1]);// Settimg the image with array of our icons
+            pHolder.menuId = position;
 
         } else {
 

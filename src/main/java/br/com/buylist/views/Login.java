@@ -44,7 +44,7 @@ public class Login extends Activity {
         IAccount accountDao = new AccountDao(this.getApplicationContext());
         Account account = accountDao.getAccount();
 
-        if (account != null) {
+        if (account.getToken() != null) {
 
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);

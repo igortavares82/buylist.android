@@ -55,6 +55,7 @@ public class LoginListener implements Response.Listener {
             this.accountDado.include(account);
 
             Intent intent = new Intent(this.context, Home.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.context.startActivity(intent);
 
         } catch (Exception e) {

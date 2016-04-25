@@ -1,38 +1,48 @@
 package br.com.buylist.models;
 
 import android.accounts.*;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.buylist.R;
 import br.com.buylist.dao.AccountDao;
+import br.com.buylist.listeners.LogoutListener;
+import br.com.buylist.views.Login;
 
 /**
  * Created by Igor on 23/04/2016.
  */
-public class ProfileHolder extends RecyclerView.ViewHolder {
+public class ProfileHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public int Holderid;
-
     public TextView textView;
     public ImageView imageView;
     public ImageView profile;
     public TextView Name;
     public TextView Email;
+    public int menuId;
 
+    private int type_view;
+    private View.OnClickListener listener;
 
-    public ProfileHolder(View itemView,int ViewType, int TYPE_ITEM) { // Creating ViewHolder Constructor with View and viewType As a parameter
+    public ProfileHolder(View itemView, int ViewType, int TYPE_ITEM) { // Creating ViewHolder Constructor with View and viewType As a parameter
 
         super(itemView);
-
-        // Here we set the appropriate view in accordance with the the view type as passed when the holder object is created
+        this.type_view = TYPE_ITEM;
 
         if(ViewType == TYPE_ITEM) {
 
+
+
             textView = (TextView) itemView.findViewById(R.id.rowText); // Creating TextView object with the id of textView from item_row.xml
             imageView = (ImageView) itemView.findViewById(R.id.rowIcon);// Creating ImageView object with the id of ImageView from item_row.xml
+            textView.setOnClickListener(this);
             Holderid = 1;                                               // setting holder id as 1 as the object being populated are of type item row
 
         } else {
@@ -42,5 +52,29 @@ public class ProfileHolder extends RecyclerView.ViewHolder {
             //profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
             Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
         }
+    }
+
+    private void bindListener () {
+
+        switch (menuId) {
+
+            case 1:
+            case 2:
+                break;
+            case 3:
+
+                this.listener = new LogoutListener();
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+
+        // PAREI AKI!!!
+        v.setBackgroundColor(Color.BLACK);
+        this.bindListener();
+        this.listener.onClick(v);
     }
 }

@@ -38,7 +38,7 @@ public class Home extends ActionBarActivity {
 
         recycleView = (RecyclerView) findViewById(R.id.RecyclerView);
         recycleView.setHasFixedSize(true);
-        adapter = new HeaderAdapter(TITLES,ICONS, this.toolbar.getContext()); // <----------------------------------------------
+        adapter = new HeaderAdapter(TITLES,ICONS, this.toolbar.getContext());
 
         recycleView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
