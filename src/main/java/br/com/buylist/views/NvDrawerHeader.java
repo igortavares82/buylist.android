@@ -1,10 +1,12 @@
 package br.com.buylist.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import br.com.buylist.dao.AccountDao;
 import br.com.buylist.models.Account;
@@ -58,21 +60,22 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
 
         ProfileHolder pHolder = (ProfileHolder) holder;
 
-        if(pHolder.Holderid == 1) { // as the list view is going to be called after the nv_drawer_header view so we decrement the
+        if(pHolder.holderId == 1) {
 
-            // position by 1 and pass it to the holder while setting the text and image
-            pHolder.textView.setText(titles[position - 1]); // Setting the Text with the array of our Titles
-            pHolder.imageView.setImageResource(icons[position - 1]);// Settimg the image with array of our icons
+            pHolder.textView.setText(titles[position - 1]);
+            pHolder.imageView.setImageResource(icons[position - 1]);
             pHolder.menuId = position;
+
+            if (position == 1)
+                holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.ColorPrimaryDark));
 
         } else {
 
             AccountDao accountDao = new AccountDao(this.context);
             Account account = accountDao.getAccount();
 
-            //pHolder.profile.setImageResource(profile);           // Similarly we set the resources for nv_drawer_header view
-            pHolder.Name.setText(account.getName());
-            pHolder.Email.setText(account.getEmail());
+            pHolder.name.setText(account.getName());
+            pHolder.email.setText(account.getEmail());
         }
     }
 

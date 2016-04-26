@@ -16,8 +16,13 @@ import br.com.buylist.R;
 public class Home extends ActionBarActivity {
 
     private Toolbar toolbar;
-    private String TITLES[] = { "Home", "My lists", "Logout" };
-    private int ICONS[] = { R.drawable.ic_home_white, R.drawable.ic_view_list_white, R.drawable.ic_exit_to_app_white  };
+    private String TITLES[] = { "Home", "My lists", "My list items", "Logout" };
+    private int ICONS[] = {
+            R.drawable.ic_home_white,
+            R.drawable.ic_view_list_white,
+            R.drawable.ic_dns_white,
+            R.drawable.ic_exit_to_app_white
+    };
 
     RecyclerView recycleView;
     RecyclerView.Adapter adapter;
