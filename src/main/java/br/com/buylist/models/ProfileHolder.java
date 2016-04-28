@@ -1,13 +1,19 @@
 package br.com.buylist.models;
 
+import android.app.Fragment;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import br.com.buylist.R;
+import br.com.buylist.fragments.HomeFragment;
+import br.com.buylist.fragments.MyListsFragment;
 import br.com.buylist.listeners.LogoutListener;
 
 /**
@@ -21,13 +27,17 @@ public class ProfileHolder extends RecyclerView.ViewHolder implements View.OnCli
     public TextView name;
     public TextView email;
     public int menuId;
-    private int type_view;
-    private View.OnClickListener listener;
 
-    public ProfileHolder(View itemView, int ViewType, int TYPE_ITEM) {
+    private int type_view;
+    private FragmentManager fragmentManager;
+    private DrawerLayout drawerLayout;
+
+    public ProfileHolder(View itemView, int ViewType, int TYPE_ITEM, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
 
         super(itemView);
         this.type_view = TYPE_ITEM;
+        this.fragmentManager = fragmentManager;
+        this.drawerLayout = drawerLayout;
 
         if(ViewType == TYPE_ITEM) {
 
@@ -48,22 +58,6 @@ public class ProfileHolder extends RecyclerView.ViewHolder implements View.OnCli
         }
     }
 
-    private void bindListener () {
-
-        switch (menuId) {
-
-            case 1:
-            case 2:
-            case 3:
-                
-                break;
-            case 4:
-
-                this.listener = new LogoutListener();
-                break;
-        }
-    }
-
     @Override
     public void onClick(View v) {
 
@@ -80,9 +74,38 @@ public class ProfileHolder extends RecyclerView.ViewHolder implements View.OnCli
 
         v.setBackgroundColor(v.getContext().getResources().getColor(R.color.ColorPrimaryDark));
 
-        this.bindListener();
+        switch (menuId) {
 
-        if (this.listener != null)
-            this.listener.onClick(v);
+            case 1:
+
+                this.fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.content_frame, new HomeFragment())
+                    .commit();
+
+                break;
+
+            case 2:
+
+                this.fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.content_frame, new MyListsFragment())
+                    .commit();
+
+                break;
+
+            case 3:
+
+                break;
+
+            case 4:
+
+                View.OnClickListener listener = new LogoutListener();
+                listener.onClick(v);
+
+                break;
+        }
+
+        this.drawerLayout.closeDrawer(Gravity.LEFT);
     }
 }

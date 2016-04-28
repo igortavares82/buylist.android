@@ -1,5 +1,6 @@
 package br.com.buylist.views;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,16 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 import br.com.buylist.R;
+import br.com.buylist.fragments.HomeFragment;
 
 public class Home extends ActionBarActivity {
 
     private Toolbar toolbar;
     private String TITLES[] = { "Home", "My lists", "My list items", "Logout" };
     private int ICONS[] = {
-            R.drawable.ic_home_white,
-            R.drawable.ic_view_list_white,
-            R.drawable.ic_dns_white,
-            R.drawable.ic_exit_to_app_white
+        R.drawable.ic_home_white,
+        R.drawable.ic_view_list_white,
+        R.drawable.ic_dns_white,
+        R.drawable.ic_exit_to_app_white
     };
 
     RecyclerView recycleView;
@@ -42,14 +44,13 @@ public class Home extends ActionBarActivity {
         recycleView = (RecyclerView) findViewById(R.id.RecyclerView);
         recycleView.setHasFixedSize(true);
 
-        // Instancia o navigation drawer
-        adapter = new NvDrawerHeader(TITLES,ICONS, this.toolbar.getContext());
+        drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
 
+        // Instancia o navigation drawer
+        adapter = new NvDrawerHeader(TITLES,ICONS, this.toolbar.getContext(), this.getSupportFragmentManager(), drawer);
         recycleView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
         recycleView.setLayoutManager(layoutManager);
-
-        drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
@@ -68,6 +69,11 @@ public class Home extends ActionBarActivity {
 
         drawer.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
+        this.getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.content_frame, new HomeFragment())
+            .commit();
     }
 
     @Override

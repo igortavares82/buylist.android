@@ -1,7 +1,10 @@
 package br.com.buylist.views;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +28,18 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
     private String titles[]; // String Array to store the passed titles Value from MainActivity.java
     private int icons[];       // Int Array to store the passed icons resource value from MainActivity.java
     private Context context;
+    private DrawerLayout drawerLayout;
 
-    NvDrawerHeader(String titles[], int Icons[], Context context) {
+    public NvDrawerHeader(String titles[], int Icons[], Context context, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
 
         this.titles = titles;
         this.icons = Icons;
         this.context = context;
+        this.fragmentManager = fragmentManager;
+        this.drawerLayout = drawerLayout;
     }
 
+    private FragmentManager fragmentManager;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,14 +47,14 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
         if (viewType == TYPE_ITEM) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nv_drawer_row,parent,false); //Inflating the layout
-            ProfileHolder vhItem = new ProfileHolder(v, viewType, TYPE_ITEM);//new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            ProfileHolder vhItem = new ProfileHolder(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout);//new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
 
             return vhItem; // Returning the created object
 
         } else if (viewType == TYPE_HEADER) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nv_drawer_header,parent,false); //Inflating the layout
-            ProfileHolder vhHeader = new ProfileHolder(v, viewType, TYPE_ITEM); //Creating ViewHolder and passing the object of type view
+            ProfileHolder vhHeader = new ProfileHolder(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout); //Creating ViewHolder and passing the object of type view
 
             return vhHeader; //returning the object created
         }
@@ -78,6 +85,7 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
             pHolder.email.setText(account.getEmail());
         }
     }
+
 
     @Override
     public int getItemCount() {

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "br.com.buylist"
         minSdkVersion 9
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -21,7 +21,7 @@ android {
 
 
 ext{
-    supportLibVersion = '22.0.0'
+    supportLibVersion = '23.0.0'
 }
 
 dependencies {
@@ -30,6 +30,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:support-v4:${supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    compile "com.mcxiaoke.volley:library-aar:1.0.0"
+    compile "com.android.support:design:${supportLibVersion}"
 }
 
