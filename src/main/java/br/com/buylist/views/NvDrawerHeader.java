@@ -1,19 +1,16 @@
 package br.com.buylist.views;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import br.com.buylist.dao.AccountDao;
 import br.com.buylist.models.Account;
-import br.com.buylist.models.ProfileHolder;
+import br.com.buylist.models.NvDrawerItem;
 
 import br.com.buylist.R;
 
@@ -47,14 +44,14 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
         if (viewType == TYPE_ITEM) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nv_drawer_row,parent,false); //Inflating the layout
-            ProfileHolder vhItem = new ProfileHolder(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout);//new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            NvDrawerItem vhItem = new NvDrawerItem(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout);//new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
 
             return vhItem; // Returning the created object
 
         } else if (viewType == TYPE_HEADER) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nv_drawer_header,parent,false); //Inflating the layout
-            ProfileHolder vhHeader = new ProfileHolder(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout); //Creating ViewHolder and passing the object of type view
+            NvDrawerItem vhHeader = new NvDrawerItem(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout); //Creating ViewHolder and passing the object of type view
 
             return vhHeader; //returning the object created
         }
@@ -65,7 +62,7 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ProfileHolder pHolder = (ProfileHolder) holder;
+        NvDrawerItem pHolder = (NvDrawerItem) holder;
 
         if(pHolder.holderId == 1) {
 

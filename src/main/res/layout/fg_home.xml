@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home fragment" />
+    <android.support.v4.widget.DrawerLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/public_lists">
+
+    </android.support.v4.widget.DrawerLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/create_list"

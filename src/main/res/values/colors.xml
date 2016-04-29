@@ -2,5 +2,5 @@
 <resources>
     <color name="ColorPrimary">#57758f</color>
     <color name="ColorPrimaryDark">#42596e</color>
-    <color name="HeaderFontColor">#000000</color>
+    <color name="HeaderFontColor">#57758f</color>
 </resources>

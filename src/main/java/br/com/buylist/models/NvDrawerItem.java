@@ -19,7 +19,7 @@ import br.com.buylist.listeners.LogoutListener;
 /**
  * Created by Igor on 23/04/2016.
  */
-public class ProfileHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class NvDrawerItem extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public int holderId;
     public TextView textView;
@@ -32,7 +32,7 @@ public class ProfileHolder extends RecyclerView.ViewHolder implements View.OnCli
     private FragmentManager fragmentManager;
     private DrawerLayout drawerLayout;
 
-    public ProfileHolder(View itemView, int ViewType, int TYPE_ITEM, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
+    public NvDrawerItem(View itemView, int ViewType, int TYPE_ITEM, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
 
         super(itemView);
         this.type_view = TYPE_ITEM;

@@ -16,9 +16,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buy List"
+            android:text="Welcome"
             android:textColor="#ffffff"
-            android:textSize="60dp"
+            android:textSize="15dp"
+            android:textAlignment="center"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:src="@drawable/ic_launcher2"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buy list"
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:textSize="50dp"
             android:textAlignment="center"/>
 
     </LinearLayout>
