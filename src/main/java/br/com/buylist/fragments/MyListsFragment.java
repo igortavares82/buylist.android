@@ -22,7 +22,7 @@ public class MyListsFragment extends Fragment {
 
         try {
 
-            view = inflater.inflate(R.layout.fg_my_lists, container, false);
+            view = inflater.inflate(R.layout.fragment_my_lists, container, false);
 
         } catch (Exception e) {
 

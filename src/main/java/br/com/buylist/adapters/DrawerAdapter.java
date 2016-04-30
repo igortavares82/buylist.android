@@ -1,4 +1,4 @@
-package br.com.buylist.views;
+package br.com.buylist.adapters;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import br.com.buylist.dao.AccountDao;
 import br.com.buylist.models.Account;
-import br.com.buylist.models.NvDrawerItem;
+import br.com.buylist.holders.DrawerHolder;
 
 import br.com.buylist.R;
 
 /**
  * Created by Igor on 23/04/2016.
  */
-public class NvDrawerHeader extends RecyclerView.Adapter {
+public class DrawerAdapter extends RecyclerView.Adapter {
 
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
     private static final int TYPE_ITEM = 1;
@@ -26,8 +26,9 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
     private int icons[];       // Int Array to store the passed icons resource value from MainActivity.java
     private Context context;
     private DrawerLayout drawerLayout;
+    private FragmentManager fragmentManager;
 
-    public NvDrawerHeader(String titles[], int Icons[], Context context, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
+    public DrawerAdapter(String titles[], int Icons[], Context context, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
 
         this.titles = titles;
         this.icons = Icons;
@@ -36,22 +37,20 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
         this.drawerLayout = drawerLayout;
     }
 
-    private FragmentManager fragmentManager;
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == TYPE_ITEM) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nv_drawer_row,parent,false); //Inflating the layout
-            NvDrawerItem vhItem = new NvDrawerItem(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout);//new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_drawer,parent,false); //Inflating the layout
+            DrawerHolder vhItem = new DrawerHolder(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout);//new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
 
             return vhItem; // Returning the created object
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nv_drawer_header,parent,false); //Inflating the layout
-            NvDrawerItem vhHeader = new NvDrawerItem(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout); //Creating ViewHolder and passing the object of type view
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_header,parent,false); //Inflating the layout
+            DrawerHolder vhHeader = new DrawerHolder(v, viewType, TYPE_ITEM, this.fragmentManager, this.drawerLayout); //Creating ViewHolder and passing the object of type view
 
             return vhHeader; //returning the object created
         }
@@ -62,7 +61,7 @@ public class NvDrawerHeader extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        NvDrawerItem pHolder = (NvDrawerItem) holder;
+        DrawerHolder pHolder = (DrawerHolder) holder;
 
         if(pHolder.holderId == 1) {
 

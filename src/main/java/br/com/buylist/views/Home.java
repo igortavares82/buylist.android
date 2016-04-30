@@ -1,6 +1,5 @@
 package br.com.buylist.views;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import br.com.buylist.R;
+import br.com.buylist.adapters.DrawerAdapter;
 import br.com.buylist.fragments.HomeFragment;
 
 public class Home extends ActionBarActivity {
@@ -47,7 +47,7 @@ public class Home extends ActionBarActivity {
         drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
 
         // Instancia o navigation drawer
-        adapter = new NvDrawerHeader(TITLES,ICONS, this.toolbar.getContext(), this.getSupportFragmentManager(), drawer);
+        adapter = new DrawerAdapter(TITLES, ICONS, this.toolbar.getContext(), this.getSupportFragmentManager(), drawer);
         recycleView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
         recycleView.setLayoutManager(layoutManager);

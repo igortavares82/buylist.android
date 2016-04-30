@@ -1,4 +1,4 @@
-package br.com.buylist.models;
+package br.com.buylist.holders;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -19,7 +19,7 @@ import br.com.buylist.listeners.LogoutListener;
 /**
  * Created by Igor on 23/04/2016.
  */
-public class NvDrawerItem extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class DrawerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public int holderId;
     public TextView textView;
@@ -32,7 +32,7 @@ public class NvDrawerItem extends RecyclerView.ViewHolder implements View.OnClic
     private FragmentManager fragmentManager;
     private DrawerLayout drawerLayout;
 
-    public NvDrawerItem(View itemView, int ViewType, int TYPE_ITEM, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
+    public DrawerHolder(View itemView, int ViewType, int TYPE_ITEM, FragmentManager fragmentManager, DrawerLayout drawerLayout) {
 
         super(itemView);
         this.type_view = TYPE_ITEM;
