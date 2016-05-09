@@ -7,7 +7,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
-    <string name="domain">http://192.168.1.6:3000/</string>
+    <string name="domain">http://192.168.0.14:3000/</string>
     <string name="error0">There is a connection error</string>
     <string name="error400">Bad request</string>
     <string name="error404">Route not find</string>

@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.buylist.R;
+import br.com.buylist.dao.AccountDao;
+import br.com.buylist.interfaces.IAccount;
+import br.com.buylist.models.Account;
 
 /**
  * Created by Igor on 11/03/2016.
@@ -20,6 +23,7 @@ import br.com.buylist.R;
 public class StrRequest extends StringRequest {
 
     private Map<String,String> params = null;
+    private Context context;
 
     public StrRequest(int method,
                       String route,
@@ -29,6 +33,7 @@ public class StrRequest extends StringRequest {
                       Context context) {
 
         super(method, context.getResources().getString(R.string.domain) + route, listener, errorListener);
+        this.context = context;
         this.params = params;
     }
 
@@ -40,8 +45,10 @@ public class StrRequest extends StringRequest {
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
+
         Map<String,String> params = new HashMap<String, String>();
         params.put("Content-Type","application/x-www-form-urlencoded");
+
         return params;
     }
 

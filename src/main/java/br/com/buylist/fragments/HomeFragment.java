@@ -1,5 +1,6 @@
 package br.com.buylist.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import br.com.buylist.R;
 import br.com.buylist.adapters.HomeAdapter;
+import br.com.buylist.dao.AccountDao;
+import br.com.buylist.helpers.HttpRequest;
+import br.com.buylist.helpers.StrRequest;
+import br.com.buylist.helpers.UtilHelper;
+import br.com.buylist.interfaces.IAccount;
+import br.com.buylist.listeners.HttpRequestListener;
+import br.com.buylist.listeners.ListsListener;
+import br.com.buylist.models.Account;
 
 /**
  * Created by Igor on 27/04/2016.
@@ -18,8 +34,6 @@ import br.com.buylist.adapters.HomeAdapter;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private HomeAdapter homeAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     public  HomeFragment(){}
 
@@ -32,15 +46,28 @@ public class HomeFragment extends Fragment {
 
             view = inflater.inflate(R.layout.fragment_home, container, false);
             this.recyclerView = (RecyclerView) view.findViewById(R.id.home_lists);
-            this.recyclerView.setHasFixedSize(true);
-            this.layoutManager = new LinearLayoutManager(this.getActivity());
-            this.recyclerView.setLayoutManager(this.layoutManager);
-            this.recyclerView.setAdapter(new HomeAdapter());
+            this.getLists();
 
         } catch (Exception e) {
 
         }
 
         return  view;
+    }
+
+    private void getLists() {
+
+        HttpRequestListener httpReqListener = new HttpRequestListener(this.getContext());
+        ListsListener listsListener = new ListsListener(this.getContext(), this.recyclerView, super.getActivity());
+
+        Map<String,String> params = new HashMap<String, String>();
+        params.put("isPublic", "true");
+        params.put("x-access-token", UtilHelper.getUserToken(this.getContext()));
+
+        HttpRequest request = HttpRequest.getInstance(this.getContext());
+        StrRequest strRequest = new StrRequest(Request.Method.GET, "list/all/", params, listsListener, httpReqListener, this.getContext());
+
+        strRequest.setTag("list.all.request");
+        request.getQueue().add(strRequest);
     }
 }
