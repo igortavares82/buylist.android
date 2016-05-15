@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
             this.getLists();
 
         } catch (Exception e) {
-
+            //TODO: Log de erro
         }
 
         return  view;

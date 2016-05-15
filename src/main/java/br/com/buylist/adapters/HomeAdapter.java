@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -20,7 +21,7 @@ import br.com.buylist.R;
  */
 public class HomeAdapter<T> extends RecyclerView.Adapter<HomeHolder> {
 
-    private java.util.List<List> lists = Collections.EMPTY_LIST;
+    private java.util.List<T> lists = Collections.EMPTY_LIST;
     private int totalItemCount;
     private int lastVisibleItem;
     private int visibleThreshold;
@@ -32,27 +33,7 @@ public class HomeAdapter<T> extends RecyclerView.Adapter<HomeHolder> {
     public HomeAdapter(java.util.List<T> lists, RecyclerView recyclerView) {
 
         final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int x, int y) {
-
-                super.onScrolled(recyclerView, x, y);
-
-                totalItemCount = linearLayoutManager.getItemCount();
-                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
-
-                if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-
-                    if (onLoadMoreListener != null) {
-                        onLoadMoreListener.onLoadMore();
-                    }
-
-                    loading = true;
-                }
-            }
-        });
+        this.lists = lists;
     }
 
     @Override
@@ -67,9 +48,14 @@ public class HomeAdapter<T> extends RecyclerView.Adapter<HomeHolder> {
     @Override
     public void onBindViewHolder(HomeHolder holder, int position) {
 
-        holder.id.setText(this.lists.get(position).getId());
-        holder.name.setText(this.lists.get(position).getName());
-        holder.description.setText(this.lists.get(position).getDescription());
+        br.com.buylist.models.List list = (br.com.buylist.models.List) this.lists.get(position);
+
+        holder.id.setText(list.getId());
+        holder.name.setText(list.getName());
+        holder.description.setText(list.getDescription());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        holder.createDate.setText(String.format("Create date: %s", sdf.format(list.getCreateDate())));
     }
 
     @Override

@@ -9,12 +9,12 @@ import com.android.volley.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 
 import br.com.buylist.R;
 import br.com.buylist.adapters.HomeAdapter;
-
 
 /**
  * Created by Igor on 08/05/2016.
@@ -51,13 +51,20 @@ public class ListsListener implements Response.Listener {
                 list.setName(listJson.getString("name"));
                 list.setIsPublic(listJson.getBoolean("isPublic"));
                 list.setIsDraft(listJson.getBoolean("isDraft"));
-                list.setDescription("Description abc 123 ...");
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                list.setCreateDate(sdf.parse(listJson.getString("createDate").substring(0, 10)));
+
+                if (listJson.has("description"))
+                    list.setDescription(listJson.getString("description"));
+                else
+                    list.setDescription("-");
 
                 lists.add(list);
             }
 
             this.recyclerView.setHasFixedSize(true);
-            this.recyclerView.setAdapter(new HomeAdapter(lists, this.recyclerView));
+            this.recyclerView.setAdapter(new HomeAdapter<br.com.buylist.models.List>(lists, this.recyclerView));
             this.layoutManager = new LinearLayoutManager(this.activity);
             this.recyclerView.setLayoutManager(this.layoutManager);
 
