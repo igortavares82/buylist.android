@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.buylist.R;
-import br.com.buylist.adapters.HomeAdapter;
-import br.com.buylist.dao.AccountDao;
 import br.com.buylist.helpers.HttpRequest;
 import br.com.buylist.helpers.StrRequest;
 import br.com.buylist.helpers.UtilHelper;
